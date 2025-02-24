@@ -13,7 +13,7 @@ if uploaded_files:
     for file in uploaded_files:
         file_ext = os.path.splitext(file.name)[-1].lower()
 
-        # ✅ Corrected file reading logic
+      #Corrected file reading logic
         if file_ext == ".csv":
             df = pd.read_csv(file)
         elif file_ext == ".xlsx":
@@ -22,15 +22,15 @@ if uploaded_files:
             st.error(f"Unsupported file type: {file_ext}")
             continue  # Skip unsupported file types
 
-        # ✅ Display file information
+        # Display file information
         st.write(f"*File Name:* {file.name}")
         st.write(f"*File Size:* {file.size / 1024:.2f} KB")
 
-        # ✅ Show 5 rows of our df
+        # Show 5 rows of our df
         st.write("Preview of the DataFrame")
         st.dataframe(df.head())
 
-        # ✅ Data Cleaning Section
+        # Data Cleaning Section
         st.subheader("Data Cleaning Options")
         if st.checkbox(f"Clean Data for {file.name}"):
             col1, col2 = st.columns(2)
