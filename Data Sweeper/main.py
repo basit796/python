@@ -46,18 +46,18 @@ if uploaded_files:
                     df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].mean())
                     st.success("Missing Values Filled")
 
-        # ✅ Column Selection
+        #  Column Selection
         st.subheader("Select Columns to Keep")
         if not df.empty:
             columns = st.multiselect(f"Choose Columns for {file.name}", df.columns, default=df.columns)
             df = df[columns]
 
-        # ✅ Data Visualization
+        #  Data Visualization
         st.subheader("Data Visualization")
         if st.checkbox(f"Show Visualization for {file.name}"):
             st.bar_chart(df.select_dtypes(include='number').iloc[:, :2])
 
-        # ✅ File Conversion
+        #  File Conversion
         st.subheader("File Conversion Options")
         conversion_type = st.radio(f"Convert {file.name} to:", ["CSV", "Excel"], key=file.name)
 
