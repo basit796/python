@@ -13,7 +13,7 @@ if uploaded_files:
     for file in uploaded_files:
         file_ext = os.path.splitext(file.name)[-1].lower()
 
-      #Corrected file reading logic
+        # ✅ Corrected file reading logic
         if file_ext == ".csv":
             df = pd.read_csv(file)
         elif file_ext == ".xlsx":
@@ -22,15 +22,15 @@ if uploaded_files:
             st.error(f"Unsupported file type: {file_ext}")
             continue  # Skip unsupported file types
 
-        # Display file information
-        st.write(f"*File Name:* {file.name}")
-        st.write(f"*File Size:* {file.size / 1024:.2f} KB")
+        # ✅ Display file information
+        st.write(f"**File Name:** {file.name}")
+        st.write(f"**File Size:** {file.size / 1024:.2f} KB")
 
-        # Show 5 rows of our df
+        # ✅ Show 5 rows of our df
         st.write("Preview of the DataFrame")
         st.dataframe(df.head())
 
-        # Data Cleaning Section
+        # ✅ Data Cleaning Section
         st.subheader("Data Cleaning Options")
         if st.checkbox(f"Clean Data for {file.name}"):
             col1, col2 = st.columns(2)
@@ -46,18 +46,18 @@ if uploaded_files:
                     df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].mean())
                     st.success("Missing Values Filled")
 
-        #  Column Selection
+        # ✅ Column Selection
         st.subheader("Select Columns to Keep")
         if not df.empty:
             columns = st.multiselect(f"Choose Columns for {file.name}", df.columns, default=df.columns)
             df = df[columns]
 
-        #  Data Visualization
+        # ✅ Data Visualization
         st.subheader("Data Visualization")
         if st.checkbox(f"Show Visualization for {file.name}"):
             st.bar_chart(df.select_dtypes(include='number').iloc[:, :2])
 
-        #  File Conversion
+        # ✅ File Conversion
         st.subheader("File Conversion Options")
         conversion_type = st.radio(f"Convert {file.name} to:", ["CSV", "Excel"], key=file.name)
 
@@ -81,4 +81,7 @@ if uploaded_files:
                 data=buffer,
                 file_name=file_name,
                 mime=mime_type
-            )
+            )     
+
+
+
